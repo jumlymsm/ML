@@ -5,3 +5,5 @@ scikit-learn
 opencv-python
 Pillow
 matplotlib
+tensorflow
+
