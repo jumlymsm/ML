@@ -30,3 +30,22 @@ if uploaded_file is not None:
 
     st.markdown(f"### 🧠 Prediction: **{predicted_class}**")
 
+    from PIL import Image
+import numpy as np
+
+# Assuming 'uploaded_file' is your uploaded image file
+if uploaded_file is not None:
+    img = Image.open(uploaded_file)
+    img = img.resize((128, 128))              # Change to match your model input shape
+    img = img.convert("RGB")                  # Ensure it's in RGB
+    img_array = np.array(img) / 255.0         # Normalize
+    img_array = np.expand_dims(img_array, axis=0)  # Shape becomes (1, 128, 128, 3)
+
+    # Predict
+    prediction = model.predict(img_array)
+    predicted_class = np.argmax(prediction, axis=1)
+    st.write("Predicted class:", class_names[predicted_class[0]])
+
+
+
+
